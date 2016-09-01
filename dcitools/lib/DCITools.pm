@@ -188,7 +188,8 @@ sub dcix_login {
     $res = $self->_xua->submit_form(
         with_fields =>
             {'ctl00$phMainContent$DCINumberTextBox' => $user,
-             'ctl00$phMainContent$PasswordTextBox' => $pass});
+             'ctl00$phMainContent$PasswordTextBox' => $pass},
+        button => 'ctl00$phMainContent$btnLogin');
     if ($res->decoded_content =~ /welcome to the Judge Center!/) {
         return 1;
     } else {
