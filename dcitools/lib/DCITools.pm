@@ -271,10 +271,10 @@ sub dcix_parse_people {
         $ret->{'expiration'} = $1;
     }
     if ($res->decoded_content =~ /Reviews \(Reviewer\):<\/b>\r?\n?\s+([^<\s].+?)\r?\n/) {
-        $ret->{'reviewsin'} = $1;
+        $ret->{'reviewsout'} = $1;
     }
     if ($res->decoded_content =~ /Reviews \(Subject\):<\/b>\r?\n?\s+([^<\s].+?)\r?\n/) {
-        $ret->{'reviewsout'} = $1;
+        $ret->{'reviewsin'} = $1;
     }
     if ($res->decoded_content =~ /Exams \(Creator\):<\/b>\r?\n?\s+([^<\s].+?)\r?\n/) {
         $ret->{'examsout'} = $1;
