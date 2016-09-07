@@ -347,10 +347,10 @@ sub apps_search {
             {'search' => $q});
     if ($res->decoded_content =~ /No results\./) {
         return undef;
-    } elsif ($res->uri =~ m|/judges/\?search=|) {
+    } elsif ($self->_ua->uri =~ m|/judges/\?search=|) {
         warn "Search with multiple results unsupported";
         return undef;
-    } elsif ($res->uri =~ m|/judges/(.+?)/|) {
+    } elsif ($self->_ua->uri =~ m|/judges/(.+?)/|) {
         my $ret;
         $ret->{'username'} = $1;
         if ($res->decoded_content =~ m|<h1>([^<]+)</h1>|) {
@@ -367,6 +367,7 @@ sub apps_search {
         if ($res->decoded_content =~ m|<th scope="col">Location:</th>\n\s*<td>([^<]+)</td>|) {
             $ret->{'location'} = $1;
         }
+        return $ret;
     } else {
         die "Unable to parse $res->uri";
     }
