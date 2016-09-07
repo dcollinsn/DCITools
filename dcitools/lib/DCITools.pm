@@ -141,20 +141,26 @@ sub get_other_versions {
         $len++;
     }
     if ($len == 5) {
+        unshift @digits, 0;
+        $len++;
+    }
+    if ($len == 6) {
+        unshift @digits, 0;
+        $len++;
+    }
+    if ($len == 7) {
         unshift @digits, $self->calc_cd(@digits);
         $len++;
         $ret->{$len} = join('', @digits);
     }
-    if ($len == 6) {
-        unshift @digits, 0;
-        unshift @digits, $self->calc_cd(@digits);
-        $len += 2;
-        $ret->{$len} = join('', @digits);
-    }
+        
     if ($len == 8) {
         unshift @digits, 0;
+        $len++;
+    }
+    if ($len == 9) {
         unshift @digits, $self->calc_cd(@digits);
-        $len += 2;
+        $len++;
         $ret->{$len} = join('', @digits);
     }
     
