@@ -337,6 +337,41 @@ sub apps_get_pending_accounts {
     return $ret;
 }
 
+sub apps_search {
+    my $self = shift;
+    my $q = shift;
+    
+    my $res = $self->_ua->get('http://apps.magicjudges.org/judges/');
+    $res = $self->_ua->submit_form(
+        with_fields =>
+            {'search' => $q});
+    if ($res->decoded_content =~ /No results\./) {
+        return undef;
+    } elsif ($res->uri =~ m|/judges/\?search=|) {
+        warn "Search with multiple results unsupported";
+        return undef;
+    } elsif ($res->uri =~ m|/judges/(.+?)/|) {
+        my $ret;
+        $ret->{'username'} = $1;
+        if ($res->decoded_content =~ m|<h1>([^<]+)</h1>|) {
+            $ret->{'realname'} = $1;
+        }
+        if ($res->decoded_content =~ /Judge \(Level (\d)\)/) {
+            $ret->{'level'} = $1;
+        } else {
+            $ret->{'level'} = 0;
+        }
+        if ($res->decoded_content =~ m|<th scope="col">DCI number:</th>\n\s*<td>(\d+)</td>|) {
+            $ret->{'dci'} = $1;
+        }
+        if ($res->decoded_content =~ m|<th scope="col">Location:</th>\n\s*<td>([^<]+)</td>|) {
+            $ret->{'location'} = $1;
+        }
+    } else {
+        die "Unable to parse $res->uri";
+    }
+}
+
 =head1 AUTHOR
 
 Dan Collins, C<< <DCOLLINS at cpan.org> >>
