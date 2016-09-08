@@ -288,6 +288,11 @@ sub dcix_parse_people {
     if ($res->decoded_content =~ /Exams \(Candidate\):<\/b>\r?\n?\s+([^<\s].+?)\r?\n/) {
         $ret->{'examsin'} = $1;
     }
+    if ($res->decoded_content =~ m|<td>Level 1</td>|) {
+        $ret->{'passedl1'} = 1;
+    } else {
+        $ret->{'passedl1'} = 0;
+    }
     
     return $ret;
 }
