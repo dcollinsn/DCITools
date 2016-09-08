@@ -359,6 +359,7 @@ sub apps_search {
     } elsif ($self->_ua->uri =~ m|/judges/(.+?)/|) {
         my $ret;
         $ret->{'username'} = $1;
+        $ret->{'url'} = $self->_ua->uri;
         if ($res->decoded_content =~ m|<h1>([^<]+)</h1>|) {
             $ret->{'realname'} = $1;
         }
