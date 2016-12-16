@@ -1,4 +1,4 @@
-use 5.006;
+#use 5.006;
 use strict;
 use warnings;
 use Module::Build;
@@ -19,6 +19,7 @@ my $builder = Module::Build->new(
         'Moose' => 0,
         'WWW::Mechanize' => 0,
         'WWW::Scripter' => 0,
+        'WWW::Scripter::Plugin::JavaScript' => 0,
     },
     add_to_cleanup     => [ 'DCITools-*' ],
     create_makefile_pl => 'traditional',
