@@ -302,7 +302,7 @@ sub apps_login {
     my $user = shift;
     my $pass = shift;
     
-    my $res = $self->_ua->get('http://apps.magicjudges.org/accounts/login/');
+    my $res = $self->_ua->get('https://apps.magicjudges.org/accounts/login/');
     $res = $self->_ua->submit_form(
         with_fields =>
             {'username' => $user,
@@ -324,13 +324,13 @@ sub apps_get_pending_accounts {
     
     while ($text =~ m|
       \s+ <tr \s class="\w+">       \r?\n
-      \s+   <td>([^<]+?)</td>       \r?\n
-      \s+   <td>([^<]+?)</td>       \r?\n
-      \s+   <td>([^<]+?)</td>       \r?\n
-      \s+   <td>([^<]+?)</td>       \r?\n
-      \s+   <td><a \s href="https://judge.wizards.com/people.aspx\?dcinumber=(\d+?)" \s target="_blank">\d+?</a></td>       \r?\n
-      \s+   <td><a \s href="https://judge.wizards.com/people.aspx\?name=[^"]+?" \s target="_blank">Link</a></td>       \r?\n
-      \s+   <td><input \s type="radio" \s name="user_id_(\d+?)" \u
+      \s+   <td.+?>([^<]+?)</td>       \r?\n
+      \s+   <td.+?>([^<]+?)</td>       \r?\n
+      \s+   <td.+?>([^<]+?)</td>       \r?\n
+      \s+   <td.+?>([^<]+?)</td>       \r?\n
+      \s+   <td.+?><a \s href="https://judge.wizards.com/people.aspx\?dcinumber=(\d+?)" \s target="_blank">\d+?</a></td>       \r?\n
+      \s+   <td.+?><a \s href="https://judge.wizards.com/people.aspx\?name=[^"]+?" \s target="_blank">Link</a></td>       \r?\n
+      \s+   <td.+?><input \s type="radio" \s name="user_id_(\d+?)" \u
       |xg) {
         my ($name, $levelstr, $location, $registered, $dci, $appsid) = ($1, $2, $3, $4, $5, $6);
         my $level = $levelstr =~ /Level (\d)/ ? $1 : 0;
