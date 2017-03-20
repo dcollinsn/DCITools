@@ -318,7 +318,7 @@ sub apps_login {
 sub apps_get_pending_accounts {
     my $self = shift;
     
-    my $res = $self->_ua->get('http://apps.magicjudges.org/accounts/review/');
+    my $res = $self->_ua->get('https://apps.magicjudges.org/accounts/review/');
     my $text = $res->decoded_content;
     my $ret;
     
@@ -349,7 +349,7 @@ sub apps_search {
     my $self = shift;
     my $q = shift;
     
-    my $res = $self->_ua->get('http://apps.magicjudges.org/judges/');
+    my $res = $self->_ua->get('https://apps.magicjudges.org/judges/');
     $res = $self->_ua->submit_form(
         with_fields =>
             {'search' => $q});
