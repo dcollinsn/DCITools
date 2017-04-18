@@ -328,8 +328,8 @@ sub apps_get_pending_accounts {
       \s+   <td.+?>([^<]+?)</td>       \r?\n
       \s+   <td.+?>([^<]+?)</td>       \r?\n
       \s+   <td.+?>([^<]+?)</td>       \r?\n
-      \s+   <td.+?><a \s href="https://judge.wizards.com/people.aspx\?dcinumber=(\d+?)" \s target="_blank">\d+?</a></td>       \r?\n
-      \s+   <td.+?><a \s href="https://judge.wizards.com/people.aspx\?name=[^"]+?" \s target="_blank">Link</a></td>       \r?\n
+      \s+   <td.+?>(\d+?)</td>       \r?\n
+      \s+   <td.+?>[^<]+?</td>       \r?\n
       \s+   <td.+?><input \s type="radio" \s name="user_id_(\d+?)" \u
       |xg) {
         my ($name, $levelstr, $location, $registered, $dci, $appsid) = ($1, $2, $3, $4, $5, $6);
